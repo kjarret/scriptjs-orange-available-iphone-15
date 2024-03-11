@@ -3,13 +3,11 @@ const nodemailer = require("nodemailer");
 const readline = require("readline");
 require("dotenv").config();
 
-// Créer une interface de lecture
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-// Demander à l'utilisateur sur quel e-mail il veut envoyer les informations
 rl.question("Veuillez entrer l'adresse e-mail de destination : ", (email) => {
   // Configurer le transporter SMTP
   const transporter = nodemailer.createTransport({
@@ -68,7 +66,7 @@ rl.question("Veuillez entrer l'adresse e-mail de destination : ", (email) => {
       ) {
         const mailOptions = {
           from: "checkiphoneapi@mail.com",
-          to: email, // Utilisation de l'e-mail entré par l'utilisateur
+          to: email,
           subject: `Changement de disponibilité pour ${productName}`,
           text: `Les nouvelles disponibilités pour ${productName} sont :\n${JSON.stringify(
             capacities
@@ -106,6 +104,5 @@ rl.question("Veuillez entrer l'adresse e-mail de destination : ", (email) => {
   execute();
   setInterval(execute, 5 * 60 * 1000);
 
-  // Fermer l'interface de lecture lorsque le programme se termine
   rl.close();
 });
